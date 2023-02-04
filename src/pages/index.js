@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import {InfoWrapper, ProductWrapper} from '../styles/index'
 
 async function getProductList() {
-  const response = await fetch("http://localhost:3003/api/getAllProducts", {
+  const response = await fetch("http://localhost:3000/api/getAllProducts", {
     method: "GET",
   });
   const json = await response.json();
@@ -11,7 +12,7 @@ async function getProductList() {
 }
 
 async function getUser() {
-  const response = await fetch("http://localhost:3003/api/getUser", {
+  const response = await fetch("http://localhost:3000/api/getUser", {
     method: "GET",
   });
   const json = response.json();
@@ -24,14 +25,14 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    getProductList().then((data) => {
+    getProductList().then((data) => {+
       setProductList(data);
       setRender(false);
     });
   }, [render]);
 
   async function deleteProduct(name) {
-    await fetch("http://localhost:3003/api/deleteProduct", {
+    await fetch("http://localhost:3000/api/deleteProduct", {
       method: "PUT",
       body: JSON.stringify({
         name: name,
@@ -47,8 +48,8 @@ export default function Home() {
       {}
       {productList ? (
         productList.map((product, index) => (
-          <p id={index}>
-            name:{product.name}desc:{product.description},price:
+          <ProductWrapper id={index}>
+           <InfoWrapper>name:{product.name}</InfoWrapper> <InfoWrapper>desc:{product.description}</InfoWrapper>,price:
             {product.price}
             <button
               style={{ padding: 20 }}
@@ -69,7 +70,7 @@ export default function Home() {
             >
               EDIT
             </button>
-          </p>
+          </ProductWrapper>
         ))
       ) : (
         <></>
