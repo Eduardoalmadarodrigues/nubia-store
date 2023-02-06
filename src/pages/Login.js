@@ -13,17 +13,17 @@ export default function Login() {
     });
     const data = await response.json();
     setUser(data);
-    if (!user.error) {
-      setTimeout(() => router.push({ pathname: "/", query: user }), 2000);
+    if (!data.error) {
+      setTimeout(() => {console.log(user);router.push({ pathname: "/", query: data })}, 2000);
     }
   }
   const [userName, setUserName] = useState("");
   const [passWord, setPassword] = useState("");
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState();
 
   return (
     <>
-      <p>{user.error || (user.name ? "Seja bem vindo, " + user.name : "")}</p>
+      <p>{user?.error || (user?.name ? "Seja bem vindo, " + user?.name : "")}</p>
       <input onChange={(e) => setUserName(e.target.value)}></input>
       <input onChange={(e) => setPassword(e.target.value)}></input>
       <button onClick={() => getUser(userName, passWord)}>ENTRAR</button>

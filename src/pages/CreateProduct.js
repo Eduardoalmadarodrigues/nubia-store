@@ -1,13 +1,14 @@
 import Link from "next/link";
 import { useState } from "react";
 
-async function createProduct(name, price, description) {
+async function createProduct(name, price, description, productImage) {
   await fetch("http://localhost:3003/api/createProduct", {
     method: "PUT",
     body: JSON.stringify({
       name: name,
       price: Number(price),
       description: description,
+      image: productImage
     }),
   });
 }
@@ -16,6 +17,7 @@ export default function CreateProduct() {
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(0);
+  const [productImage, setProductImage] = useState("");
   return (
     <>
       <input
@@ -30,10 +32,14 @@ export default function CreateProduct() {
         placeholder="price"
         onChange={(e) => setProductPrice(e.target.value)}
       ></input>
+            <input
+        placeholder="image"
+        onChange={(e) => setProductImage(e.target.value)}
+      ></input>
       <button
         style={{ padding: 20 }}
         onClick={() => {
-          createProduct(productName, productPrice, productDescription);
+          createProduct(productName, productPrice, productDescription, productImage);
         }}
       >
         createProduct

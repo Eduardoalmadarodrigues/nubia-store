@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -23,11 +24,8 @@ export default function Home() {
   const [productList, setProductList] = useState();
   const [render, setRender] = useState(true);
   const router = useRouter();
-  const a = router.query
-  const [user, setUser] = useState(a);
 
   useEffect(() => {
-    console.log(user);
     getProductList().then((data) => {
       setProductList(data);
       setRender(false);
@@ -46,7 +44,7 @@ export default function Home() {
 
   return (
     <>
-      <p>asdasd{user.name}</p>
+      <p>{router.query.name || "Visitante"}</p>
       <p>
         <Link href="CreateProduct">CreateProduct</Link>
       </p>
@@ -60,6 +58,7 @@ export default function Home() {
       {productList ? (
         productList.map((product, index) => (
           <ProductWrapper id={index}>
+            <Image width={300} height={300} src={product.image}></Image>
             <InfoWrapper>name:{product.name}</InfoWrapper>{" "}
             <InfoWrapper>desc:{product.description}</InfoWrapper>,price:
             {product.price}
