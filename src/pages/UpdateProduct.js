@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 async function updateProduct(name, description, price, oldName) {
-  await fetch("http://localhost:3000/api/updateProduct", {
+  await fetch("http://localhost:3003/api/updateProduct", {
     method: "PUT",
     body: JSON.stringify({
       data: {

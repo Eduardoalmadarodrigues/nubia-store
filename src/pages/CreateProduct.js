@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 async function createProduct(name, price, description) {
-  await fetch("http://localhost:3000/api/createProduct", {
+  await fetch("http://localhost:3003/api/createProduct", {
     method: "PUT",
     body: JSON.stringify({
       name: name,

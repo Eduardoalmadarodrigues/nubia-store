@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 async function registerUser(name, email, password) {
-  await fetch("http://localhost:3000/api/registerUser", {
+  await fetch("http://localhost:3003/api/registerUser", {
     method: "PUT",
     body: JSON.stringify({
       name: name,
