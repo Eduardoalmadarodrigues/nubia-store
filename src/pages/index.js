@@ -58,7 +58,7 @@ export default function Home() {
       {productList ? (
         productList.map((product, index) => (
           <ProductWrapper id={index}>
-            <Image width={300} height={300} src={product.image}></Image>
+           <Image width={300} height={300} src={product.image}></Image>
             <InfoWrapper>name:{product.name}</InfoWrapper>{" "}
             <InfoWrapper>desc:{product.description}</InfoWrapper>,price:
             {product.price}

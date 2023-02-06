@@ -33,8 +33,15 @@ export default function CreateProduct() {
         onChange={(e) => setProductPrice(e.target.value)}
       ></input>
             <input
-        placeholder="image"
-        onChange={(e) => setProductImage(e.target.value)}
+            accept="image/jpg"
+            type="file"
+        placeholder="image"     
+        onChange={(e) =>{         
+          const reader = new FileReader();
+          reader.readAsDataURL(e.target.files[0]);
+          reader.onload = () => {
+            setProductImage(reader.result);
+          }}}
       ></input>
       <button
         style={{ padding: 20 }}
