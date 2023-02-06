@@ -1,4 +1,5 @@
 import Link from "next/link";
+import defaultProductImage from "public/defaultProductImage";
 import { useState } from "react";
 
 async function createProduct(name, price, description, productImage) {
@@ -17,7 +18,7 @@ export default function CreateProduct() {
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState(0);
-  const [productImage, setProductImage] = useState("");
+  const [productImage, setProductImage] = useState(defaultProductImage);
   return (
     <>
       <input

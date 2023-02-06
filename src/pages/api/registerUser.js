@@ -6,11 +6,12 @@ import User from "../../models/user.model";
 
 export default function handler(req, res) {
   mongoose.connect(uri, { useNewUrlParser: true });
-  const { name, email, password } = JSON.parse(req.body);
+  const { name, email, password, image } = JSON.parse(req.body);
   const newUser = new User({
     name: name,
     email: email,
     password: password,
+    image: image,
     createdAt: new Date(),
   });
   newUser.save((err) => {

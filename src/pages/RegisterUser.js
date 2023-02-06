@@ -1,13 +1,15 @@
 import { useRouter } from "next/router";
+import defaultUserImage from "public/defaultUserImage";
 import { useState } from "react";
 
-async function registerUser(name, email, password) {
+async function registerUser(name, email, password, userImage) {
   await fetch("http://localhost:3003/api/registerUser", {
     method: "PUT",
     body: JSON.stringify({
       name: name,
       email: email,
       password: password,
+      image: userImage
     }),
   });
 }
@@ -17,6 +19,7 @@ export default function RegisterUser() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userImage, setUserImage] = useState(defaultUserImage)
   return (
     <>
       <input
@@ -31,9 +34,20 @@ export default function RegisterUser() {
         placeholder="Senha"
         onChange={(e) => setPassword(e.target.value)}
       ></input>
+        <input
+            accept="image/jpg"
+            type="file"
+        placeholder="image"     
+        onChange={(e) =>{         
+          const reader = new FileReader();
+          reader.readAsDataURL(e.target.files[0]);
+          reader.onload = () => {
+            setUserImage(reader.result);
+          }}}
+      ></input>
       <button
         onClick={() => {
-          registerUser(name, email, password);
+          registerUser(name, email, password, userImage);
         }}
       >
         Register
